@@ -6,6 +6,7 @@ require 'fileutils'
 require 'uri'
 
 require 'grabber/alexa'
+require 'grabber/mailru'
 
 class AnalyticsGrabber
 	def initialize(url)
@@ -14,9 +15,10 @@ class AnalyticsGrabber
 
 	def run
 		r = {
-			:alexa => Alexa.new(@url).run
+			:alexa => Alexa.new(@url).run,
+			:mailru => MailRu.new(@url).run,
 		}
 	end
 end
 
-p AnalyticsGrabber.new('http://lexus.com/').run
+p AnalyticsGrabber.new('http://ria.ru/').run
