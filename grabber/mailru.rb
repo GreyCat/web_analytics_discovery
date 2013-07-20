@@ -9,7 +9,7 @@ class MailRu
 	end
 
 	def find_id
-		if @page =~ /<a href="http:\/\/top.mail.ru\/jump\?from=(\d+)"><img src="http:\/\/.*.top.mail.ru\/counter/
+		if @page =~ /<a href="http:\/\/top.mail.ru\/jump\?from=(\d+)".*><img src="http:\/\/.*.top.mail.ru\/counter/
 			$1
 		else
 			nil
