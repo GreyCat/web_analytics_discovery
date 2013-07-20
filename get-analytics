@@ -7,7 +7,9 @@ require 'uri'
 
 require 'grabber/alexa'
 require 'grabber/mailru'
+require 'grabber/openstat'
 require 'grabber/rambler'
+require 'grabber/yandexmetrika'
 
 class AnalyticsGrabber
 	def self.run(url)
@@ -16,6 +18,7 @@ class AnalyticsGrabber
 			:mailru => MailRu.new.run(url),
 			:openstat => Openstat.new.run(url),
 			:rambler => Rambler.new.run(url),
+			:yandexmetrika => YandexMetrika.new.run(url),
 		}
 	end
 
