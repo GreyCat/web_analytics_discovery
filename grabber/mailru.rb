@@ -37,14 +37,4 @@ class MailRu
 		r[:pv_mon] = sum_pv
 		return r
 	end
-
-	def grab(doc, classname)
-		a = []
-		doc.gsub(/#{classname}">([^<]+)<\/td>/) {
-			r = $1
-			r.gsub!(/&nbsp;/, '')
-			a << r.to_i
-		}
-		return a
-	end
 end
