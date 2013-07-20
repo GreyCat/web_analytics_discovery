@@ -19,6 +19,29 @@ class AnalyticsGrabber
 			:mailru => MailRu.new(@url).run,
 		}
 	end
+
+	def pp
+		print_line ['', 'v/day', 's/day', 'pv/day', 'v/mon', 's/mon', 'pv/mon']
+		run.each_pair { |service, res|
+			print_line [
+				service,
+				res[:visitors_day],
+				res[:visits_day],
+				res[:pv_day],
+				res[:visitors_mon],
+				res[:visits_mon],
+				res[:pv_mon],
+			]
+		}
+	end
+
+	def print_line(a)
+		printf '%-20s', a.shift
+		a.each { |x|
+			printf '|%11s', x || 'N/A'
+		}
+		puts
+	end
 end
 
-p AnalyticsGrabber.new('http://ria.ru/').run
+AnalyticsGrabber.new('http://ria.ru/').pp
