@@ -5,6 +5,20 @@ class Openstat
 
 	BIG_SITE_ID = 601119
 
+	def run(url)
+		@page = download(url)
+		run_id(find_id)
+	end
+
+	def find_id
+		case @page
+		when /<span id="spylog(\d+)"><\/span>/
+			$1
+		else
+			nil
+		end
+	end
+
 	def run_id(id)
 		r = {}
 		doc = download("http://rating.openstat.ru/site/#{id}")

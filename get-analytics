@@ -14,6 +14,7 @@ class AnalyticsGrabber
 		r = {
 			:alexa => Alexa.new.run(url),
 			:mailru => MailRu.new.run(url),
+			:openstat => Openstat.new.run(url),
 			:rambler => Rambler.new.run(url),
 		}
 	end
@@ -21,6 +22,7 @@ class AnalyticsGrabber
 	def self.pp(url)
 		print_line ['', 'v/day', 's/day', 'pv/day', 'v/mon', 's/mon', 'pv/mon']
 		run(url).each_pair { |service, res|
+			next unless res
 			print_line [
 				service,
 				res[:visitors_day],
@@ -42,4 +44,4 @@ class AnalyticsGrabber
 	end
 end
 
-AnalyticsGrabber.pp('http://ria.ru/')
+AnalyticsGrabber.pp('http://kp.ru/')
