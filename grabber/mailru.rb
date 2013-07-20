@@ -24,7 +24,7 @@ class MailRu
 		return nil unless id
 		r = {}
 
-		doc = download("http://top.mail.ru/visits.csv?id=#{id}&period=0&date=&back=15&").split(/\n/)[4..-1]
+		doc = download("http://top.mail.ru/visits.csv?id=#{id}&period=0&date=&back=30&").split(/\n/)[4..-1]
 		sum_v = 0
 		sum_pv = 0
 		doc.each { |l|
@@ -38,6 +38,7 @@ class MailRu
 
 		r[:visitors_day] = sum_v / doc.size
 		r[:pv_day] = sum_pv / doc.size
+		r[:pv_mon] = sum_pv
 		return r
 	end
 
