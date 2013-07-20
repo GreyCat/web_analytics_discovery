@@ -17,8 +17,8 @@ class Alexa
 	def run
 		big_site_perc = get_global_percents(BIG_SITE_HOST)
 		big_site_val = Openstat.new.run_id(Openstat::BIG_SITE_ID)
-		p big_site_val
 		r = get_global_percents(@host)
+		calc_values(r, big_site_perc, big_site_val)
 		return r
 	end
 
@@ -36,7 +36,12 @@ class Alexa
 
 	def grab_percentages(doc)
 		r = []
-		doc.gsub(/<td class="avg ">([0-9.]+)%<\/td>/) { |x| r << $1 }
+		doc.gsub(/<td class="avg ">([0-9.]+)%<\/td>/) { |x| r << $1.to_f }
 		return r
+	end
+
+	def calc_values(r, big_perc, big_val)
+		r[:visitors_mon] = (big_val[:visitors_mon] / big_perc[:visitors_mon_percent] * r[:visitors_mon_percent]).to_i
+		r[:pv_mon] = (big_val[:pv_mon] / big_perc[:pv_mon_percent] * r[:pv_mon_percent]).to_i
 	end
 end
