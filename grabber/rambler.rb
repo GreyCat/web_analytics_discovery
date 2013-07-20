@@ -37,6 +37,18 @@ class Rambler
 			r[:visitors_mon] = $6.to_i
 		end
 
+		if doc =~ /Визитов \(сессий\)\t(\d+)\t(\d+)\t(\d+)\t(\d+)\t(\d+)\t(\d+)/
+			r[:visits_day] = $2.to_i
+			r[:visits_week] = $4.to_i
+			r[:visits_mon] = $6.to_i
+		end
+
+		if doc =~ /Просмотров страниц\n\s*всего\t(\d+)\t(\d+)\t(\d+)\t(\d+)\t(\d+)\t(\d+)/
+			r[:pv_day] = $2.to_i
+			r[:pv_week] = $4.to_i
+			r[:pv_mon] = $6.to_i
+		end
+
 		return r
 	end
 
