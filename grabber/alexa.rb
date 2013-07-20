@@ -43,5 +43,8 @@ class Alexa
 	def calc_values(r, big_perc, big_val)
 		r[:visitors_mon] = (big_val[:visitors_mon] / big_perc[:visitors_mon_percent] * r[:visitors_mon_percent]).to_i
 		r[:pv_mon] = (big_val[:pv_mon] / big_perc[:pv_mon_percent] * r[:pv_mon_percent]).to_i
+
+		# Approximate average daily PV from monthly PV
+		r[:pv_day] = (r[:pv_mon] / 30.4375).to_i
 	end
 end
