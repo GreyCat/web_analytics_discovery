@@ -12,7 +12,7 @@ class Openstat
 
 	def find_id
 		case @page
-		when /<span id="spylog(\d+)"><\/span>/
+		when /<span id="(?:openstat|spylog)(\d+)"><\/span>/
 			$1
 		else
 			nil
