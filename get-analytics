@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+
+$LOAD_PATH << '.'
+
+require 'fileutils'
+require 'uri'
+
+require 'grabber/alexa'
+
+class AnalyticsGrabber
+	def initialize(url)
+		@url = url
+	end
+
+	def run
+		r = {
+			:alexa => Alexa.new(@url).run
+		}
+	end
+end
+
+p AnalyticsGrabber.new('http://lexus.com/').run
