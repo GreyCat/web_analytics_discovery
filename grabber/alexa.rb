@@ -2,6 +2,7 @@
 
 require 'uri'
 require 'grabberutils'
+require 'grabber/openstat'
 
 class Alexa
 	include GrabberUtils
@@ -14,7 +15,9 @@ class Alexa
 	end
 
 	def run
-		big_site = get_global_percents(BIG_SITE_HOST)
+		big_site_perc = get_global_percents(BIG_SITE_HOST)
+		big_site_val = Openstat.new.run_id(Openstat::BIG_SITE_ID)
+		p big_site_val
 		r = get_global_percents(@host)
 		return r
 	end
@@ -23,10 +26,10 @@ class Alexa
 		r = {}
 		doc = download("http://www.alexa.com/siteinfo/#{host}#trafficstats")
 		if doc =~ /<table class="visitors_percent">(.*?)<\/table>/m
-			r[:visitors_week_percent], r[:visitors_mon1_percent], r[:visitors_mon3_percent] = grab_percentages($1)
+			r[:visitors_week_percent], r[:visitors_mon_percent], r[:visitors_mon3_percent] = grab_percentages($1)
 		end
 		if doc =~ /<table class="pageviews_percent">(.*?)<\/table>/m
-			r[:pv_week_percent], r[:pv_mon1_percent], r[:pv_mon3_percent] = grab_percentages($1)
+			r[:pv_week_percent], r[:pv_mon_percent], r[:pv_mon3_percent] = grab_percentages($1)
 		end
 		return r
 	end
