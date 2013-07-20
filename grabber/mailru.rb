@@ -20,7 +20,7 @@ class MailRu
 		return nil unless id
 		r = {}
 
-		doc = download("http://top.mail.ru/visits.csv?id=#{id}&period=0&date=&back=30&").split(/\n/)[4..-1]
+		doc = download("http://top.mail.ru/visits.csv?id=#{id}&period=0&date=&back=30&", 'windows-1251').split(/\n/)[4..-1]
 		sum_v = 0
 		sum_pv = 0
 		doc.each { |l|
