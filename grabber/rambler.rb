@@ -11,7 +11,10 @@ class Rambler
 	end
 
 	def find_id
-		if @page =~ /_top100q.push\(\["setAccount", "(\d+)"\]\)/
+		case @page
+		when /_top100q.push\(\["setAccount", "(\d+)"\]\)/
+			$1
+		when /<a href="http:\/\/top100\.rambler\.ru\/cgi-bin\/stats_top100\.cgi\?(\d+)"/
 			$1
 		else
 			nil
