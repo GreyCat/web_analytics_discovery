@@ -5,12 +5,8 @@ require 'grabberutils'
 class Rambler
 	include GrabberUtils
 
-	def initialize(url)
-		@url = url
-	end
-
-	def run
-		@page = download(@url)
+	def run(url)
+		@page = download(url)
 		run_id(find_id)
 	end
 

@@ -10,21 +10,17 @@ require 'grabber/mailru'
 require 'grabber/rambler'
 
 class AnalyticsGrabber
-	def initialize(url)
-		@url = url
-	end
-
-	def run
+	def self.run(url)
 		r = {
-			:alexa => Alexa.new(@url).run,
-			:mailru => MailRu.new(@url).run,
-			:rambler => Rambler.new(@url).run,
+			:alexa => Alexa.new.run(url),
+			:mailru => MailRu.new.run(url),
+			:rambler => Rambler.new.run(url),
 		}
 	end
 
-	def pp
+	def self.pp(url)
 		print_line ['', 'v/day', 's/day', 'pv/day', 'v/mon', 's/mon', 'pv/mon']
-		run.each_pair { |service, res|
+		run(url).each_pair { |service, res|
 			print_line [
 				service,
 				res[:visitors_day],
@@ -37,7 +33,7 @@ class AnalyticsGrabber
 		}
 	end
 
-	def print_line(a)
+	def self.print_line(a)
 		printf '%-20s', a.shift
 		a.each { |x|
 			printf '|%11s', x || 'N/A'
@@ -46,4 +42,4 @@ class AnalyticsGrabber
 	end
 end
 
-AnalyticsGrabber.new('http://ria.ru/').pp
+AnalyticsGrabber.pp('http://ria.ru/')

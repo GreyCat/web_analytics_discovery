@@ -9,17 +9,15 @@ class Alexa
 
 	BIG_SITE_HOST = 'rutracker.org'
 
-	def initialize(url)
-		@uri = URI.parse(url)
-		@host = @uri.host
+	def initialize
+		@big_perc = get_global_percents(BIG_SITE_HOST)
+		@big_val = Openstat.new.run_id(Openstat::BIG_SITE_ID)
 	end
 
-	def run
-		big_site_perc = get_global_percents(BIG_SITE_HOST)
-		big_site_val = Openstat.new.run_id(Openstat::BIG_SITE_ID)
-		r = get_global_percents(@host)
-		calc_values(r, big_site_perc, big_site_val)
-		return r
+	def run(url)
+		uri = URI.parse(url)
+		host = uri.host
+		return calc_values(get_global_percents(host))
 	end
 
 	def get_global_percents(host)
@@ -40,11 +38,13 @@ class Alexa
 		return r
 	end
 
-	def calc_values(r, big_perc, big_val)
-		r[:visitors_mon] = (big_val[:visitors_mon] / big_perc[:visitors_mon_percent] * r[:visitors_mon_percent]).to_i
-		r[:pv_mon] = (big_val[:pv_mon] / big_perc[:pv_mon_percent] * r[:pv_mon_percent]).to_i
+	def calc_values(r)
+		r[:visitors_mon] = (@big_val[:visitors_mon] / @big_perc[:visitors_mon_percent] * r[:visitors_mon_percent]).to_i
+		r[:pv_mon] = (@big_val[:pv_mon] / @big_perc[:pv_mon_percent] * r[:pv_mon_percent]).to_i
 
 		# Approximate average daily PV from monthly PV
 		r[:pv_day] = (r[:pv_mon] / 30.4375).to_i
+
+		return r
 	end
 end
