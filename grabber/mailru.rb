@@ -18,7 +18,7 @@ class MailRu
 
 	def run_id(id)
 		return nil unless id
-		r = {}
+		r = {:id => id}
 
 		doc = download("http://top.mail.ru/visits.csv?id=#{id}&period=0&date=&back=30&", 'windows-1251').split(/\n/)[4..-1]
 		sum_v = 0

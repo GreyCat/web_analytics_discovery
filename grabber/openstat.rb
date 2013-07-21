@@ -21,7 +21,7 @@ class Openstat
 
 	def run_id(id)
 		return nil unless id
-		r = {}
+		r = {:id => id}
 		doc = download("http://rating.openstat.ru/site/#{id}")
 		r[:visitors_day], r[:visits_day], r[:pv_day] = grab(doc, 'osb-rating_site-e-table-col-m-day')
 		r[:visitors_mon], r[:visits_mon], r[:pv_mon] = grab(doc, 'osb-rating_site-e-table-col-m-month')

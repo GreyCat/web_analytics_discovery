@@ -22,7 +22,7 @@ class YandexMetrika
 
 	def run_id(id)
 		return nil unless id
-		r = {}
+		r = {:id => id}
 
 		json = download("http://bs.yandex.ru/informer/#{id}/json")
 

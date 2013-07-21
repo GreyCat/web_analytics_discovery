@@ -25,7 +25,7 @@ class Rambler
 
 	def run_id(id)
 		return nil unless id
-		r = {}
+		r = {:id => id}
 
 #		doc = download("http://top100.rambler.ru/resStats/#{id}/")
 		doc = download("http://top100.rambler.ru/resStats/#{id}/?_export=csv&_id=#{id}&_page=0", 'UTF-16LE')
