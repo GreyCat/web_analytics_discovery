@@ -26,11 +26,12 @@ class AnalyticsGrabber
 
 	def self.pp(url)
 		r = run(url)
-		print_line ['', 'v/day', 's/day', 'pv/day', 'v/mon', 's/mon', 'pv/mon']
+		print_line ['', 'id', 'v/day', 's/day', 'pv/day', 'v/mon', 's/mon', 'pv/mon']
 		r.each_pair { |service, res|
 			next unless res
 			print_line [
 				service,
+				res[:id],
 				res[:visitors_day],
 				res[:visits_day],
 				res[:pv_day],
@@ -50,4 +51,4 @@ class AnalyticsGrabber
 	end
 end
 
-AnalyticsGrabber.pp('http://rutracker.org/forum/index.php')
+AnalyticsGrabber.pp('http://1tv.ru/')
