@@ -6,6 +6,7 @@ require 'fileutils'
 require 'uri'
 
 require 'grabber/alexa'
+require 'grabber/liveinternet'
 require 'grabber/mailru'
 require 'grabber/openstat'
 require 'grabber/rambler'
@@ -15,6 +16,7 @@ class AnalyticsGrabber
 	def self.run(url)
 		r = {
 			:alexa => Alexa.new.run(url),
+			:liveinternet => LiveInternet.new.run(url),
 			:mailru => MailRu.new.run(url),
 			:openstat => Openstat.new.run(url),
 			:rambler => Rambler.new.run(url),
@@ -48,4 +50,4 @@ class AnalyticsGrabber
 	end
 end
 
-AnalyticsGrabber.pp('http://kp.ru/')
+AnalyticsGrabber.pp('http://rutracker.org/forum/index.php')
