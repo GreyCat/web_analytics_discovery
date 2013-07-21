@@ -9,7 +9,7 @@ class MailRu
 	end
 
 	def find_id
-		if @page =~ /<a href="http:\/\/top.mail.ru\/jump\?from=(\d+)".*><img src="http:\/\/.*.top.mail.ru\/counter/
+		if @page =~ /<a href="http:\/\/top.mail.ru\/jump\?from=(\d+)".*>\s*<img src="http:\/\/.*.top.mail.ru\/counter/m
 			$1
 		else
 			nil
@@ -20,7 +20,10 @@ class MailRu
 		return nil unless id
 		r = {:id => id}
 
-		doc = download("http://top.mail.ru/visits.csv?id=#{id}&period=0&date=&back=30&", 'windows-1251').split(/\n/)[4..-1]
+		doc = download("http://top.mail.ru/visits.csv?id=#{id}&period=0&date=&back=30&", 'windows-1251').split(/\n/)
+		return r if doc.empty?
+		doc = doc[4..-1]
+
 		sum_v = 0
 		sum_pv = 0
 		doc.each { |l|
