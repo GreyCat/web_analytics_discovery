@@ -16,6 +16,8 @@ class Rambler
 			$1
 		when /<a href="http:\/\/top100\.rambler\.ru\/cgi-bin\/stats_top100\.cgi\?(\d+)"/
 			$1
+		when /<script.*src="http:\/\/counter\.rambler\.ru\/top100\.jcn\?(\d+)">/
+			$1
 		else
 			nil
 		end
