@@ -46,6 +46,7 @@ class AnalyticsGrabber
 
 	def self.print_line(a)
 		printf '%-20s', a.shift
+		printf '|%24s', a.shift
 		a.each { |x|
 			printf '|%11s', x || 'N/A'
 		}
@@ -53,4 +54,4 @@ class AnalyticsGrabber
 	end
 end
 
-AnalyticsGrabber.pp('http://www.microsoft.com/')
+ARGV.each { |a| AnalyticsGrabber.pp(a) }
