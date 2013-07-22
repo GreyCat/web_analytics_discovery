@@ -9,6 +9,7 @@ require 'grabber/alexa'
 require 'grabber/liveinternet'
 require 'grabber/mailru'
 require 'grabber/openstat'
+require 'grabber/quantcast'
 require 'grabber/rambler'
 require 'grabber/yandexmetrika'
 
@@ -19,6 +20,7 @@ class AnalyticsGrabber
 			:liveinternet => LiveInternet.new.run(url),
 			:mailru => MailRu.new.run(url),
 			:openstat => Openstat.new.run(url),
+			:quantcast => Quantcast.new.run(url),
 			:rambler => Rambler.new.run(url),
 			:yandexmetrika => YandexMetrika.new.run(url),
 		}
@@ -51,4 +53,4 @@ class AnalyticsGrabber
 	end
 end
 
-AnalyticsGrabber.pp('http://1tv.ru/')
+AnalyticsGrabber.pp('http://www.microsoft.com/')
