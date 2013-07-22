@@ -1,11 +1,21 @@
 module GrabberUtils
 	CACHE_DIR = 'cache'
+	USER_AGENT = 'Mozilla/5.0 (Windows NT 6.1; rv:22.0) Gecko/20100101 Firefox/22.0'
 
-	def download(url, encoding = 'UTF-8')
+	def download(url, encoding = 'UTF-8', options = {})
 		FileUtils.mkdir_p(CACHE_DIR)
 		fn = CACHE_DIR + '/' + mangle_url(url)
 		unless FileTest.exists?(fn)
-			system("wget --user-agent='Mozilla/5.0 (Windows NT 6.1; rv:22.0) Gecko/20100101 Firefox/22.0' -O'#{fn}' '#{url}'")
+			opt = {
+				'user-agent' => USER_AGENT,
+				'load-cookies' => 'cookies.txt',
+				'save-cookies' => 'cookies.txt',
+			}
+			if options['Referer']
+				opt['referer'] = options['Referer']
+			end
+			opt = opt.map { |k, v| "--#{k}='#{v}'" }.join(' ')
+			system("wget --debug --keep-session-cookies -O'#{fn}' #{opt} '#{url}'")
 			raise 'Download error' if $?.exitstatus != 0
 		end
 
