@@ -22,6 +22,9 @@ class Quantcast
 			return nil
 		end
 
+		# Quantcast has no traffic info? We should stop here
+		return r if doc =~ /content="We do not have enough information to provide a traffic estimate./
+
 		# Use auth cookies with API call
 		id_encoded = CGI::escape(id)
 		doc = download(
