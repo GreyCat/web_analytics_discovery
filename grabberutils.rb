@@ -15,7 +15,7 @@ module GrabberUtils
 				opt['referer'] = options['Referer']
 			end
 			opt = opt.map { |k, v| "--#{k}='#{v}'" }.join(' ')
-			system("wget --debug --keep-session-cookies -O'#{fn}' #{opt} '#{url}'")
+			system("wget --debug --append-output=wget.log --keep-session-cookies -O'#{fn}' #{opt} '#{url}'")
 			raise 'Download error' if $?.exitstatus != 0
 		end
 
