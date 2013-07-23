@@ -14,6 +14,8 @@ class Openstat
 		case @page
 		when /<span id="(?:openstat|spylog)(\d+)"><\/span>/
 			$1
+		when /<img src=["']?http:\/\/u([0-9.]+)\.spylog\.com\/cnt/
+			$1.gsub(/[.]/, '').to_i
 		else
 			nil
 		end
