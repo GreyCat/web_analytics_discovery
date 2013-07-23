@@ -28,4 +28,7 @@ module GrabberUtils
 	def mangle_url(url)
 		url.gsub(/[:\/]/, '_')
 	end
+
+	# Average number of days per month
+	AVG_DAYS_IN_MONTH = 365.25 / 12
 end
