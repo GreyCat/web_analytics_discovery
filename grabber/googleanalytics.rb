@@ -10,7 +10,9 @@ class GoogleAnalytics
 
 	def find_id
 		case @page
-		when /_gat\._getTracker\("([^"]+)"\)/
+		when /_gat\._getTracker\(["']([^"']+)["']\)/
+			$1
+		when /_gaq\.push\(\[['"]_setAccount['"], ['"]([^"']+)['"]\]\)/
 			$1
 		else
 			nil
