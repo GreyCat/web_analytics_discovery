@@ -8,6 +8,8 @@ RSpec.configure { |config|
 }
 
 def full_result_check(res)
+  res.should_not be_nil
+
   res[:visitors_day].should_not be_nil
   res[:visits_day].should_not be_nil
   res[:pv_day].should_not be_nil
