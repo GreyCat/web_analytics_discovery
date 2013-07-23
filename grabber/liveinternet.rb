@@ -8,8 +8,10 @@ class LiveInternet
 
 	def run(url)
 		uri = URI.parse(url)
-		host = uri.host
+		run_id(uri.host)
+	end
 
+	def run_id(host)
 		r = {}
 
 		doc = download("http://www.liveinternet.ru/stat/#{host}/index.csv")
