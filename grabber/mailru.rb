@@ -9,7 +9,10 @@ class MailRu
 	end
 
 	def find_id
-		if @page =~ /<a [^>]*href="http:\/\/top.mail.ru\/jump\?from=(\d+)".*>\s*<img src="http:\/\/.*.top.mail.ru\/counter/m
+		case @page
+		when /<a [^>]*href="http:\/\/top.mail.ru\/jump\?from=(\d+)".*>\s*<img src="http:\/\/.*.top.mail.ru\/counter/m
+			$1
+		when /_tmr.push\(\{id:\s*['"](\d+)['"]/
 			$1
 		else
 			nil
