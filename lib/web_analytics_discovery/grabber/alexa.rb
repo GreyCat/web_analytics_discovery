@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 
 require 'uri'
-require 'grabberutils'
-require 'grabber/openstat'
+require 'web_analytics_discovery/grabberutils'
+require 'web_analytics_discovery/grabber/openstat'
 
 class Alexa
 	include GrabberUtils

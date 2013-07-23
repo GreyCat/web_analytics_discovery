@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 
 require 'uri'
-require 'grabberutils'
+require 'web_analytics_discovery/grabberutils'
 
 class LiveInternet
 	include GrabberUtils

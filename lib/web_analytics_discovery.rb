@@ -1,0 +1,8 @@
+require 'web_analytics_discovery/grabber/alexa'
+require 'web_analytics_discovery/grabber/googleanalytics'
+require 'web_analytics_discovery/grabber/liveinternet'
+require 'web_analytics_discovery/grabber/mailru'
+require 'web_analytics_discovery/grabber/openstat'
+require 'web_analytics_discovery/grabber/quantcast'
+require 'web_analytics_discovery/grabber/rambler'
+require 'web_analytics_discovery/grabber/yandexmetrika'

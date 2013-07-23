@@ -1,4 +1,4 @@
-require 'grabberutils'
+require 'web_analytics_discovery/grabberutils'
 
 class GoogleAnalytics
 	include GrabberUtils

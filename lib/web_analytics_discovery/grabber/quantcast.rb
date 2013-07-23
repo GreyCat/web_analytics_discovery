@@ -3,7 +3,7 @@
 require 'cgi'
 require 'uri'
 require 'json'
-require 'grabberutils'
+require 'web_analytics_discovery/grabberutils'
 
 class Quantcast
 	include GrabberUtils

@@ -1,18 +1,11 @@
 #!/usr/bin/env ruby
 
-$LOAD_PATH << '.'
+$LOAD_PATH << '../lib'
 
 require 'fileutils'
 require 'uri'
 
-require 'grabber/alexa'
-require 'grabber/googleanalytics'
-require 'grabber/liveinternet'
-require 'grabber/mailru'
-require 'grabber/openstat'
-require 'grabber/quantcast'
-require 'grabber/rambler'
-require 'grabber/yandexmetrika'
+require 'web_analytics_discovery'
 
 class AnalyticsGrabber
 	def self.run(url)

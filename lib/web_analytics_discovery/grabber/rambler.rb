@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-require 'grabberutils'
+require 'web_analytics_discovery/grabberutils'
 
 class Rambler
 	include GrabberUtils
