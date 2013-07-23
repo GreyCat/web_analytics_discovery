@@ -10,7 +10,9 @@ class MailRu
 
 	def find_id
 		case @page
-		when /<a [^>]*href="http:\/\/top.mail.ru\/jump\?from=(\d+)".*>\s*<img src="http:\/\/.*.top.mail.ru\/counter/m
+		when /<a [^>]*href="http:\/\/top\.mail\.ru\/jump\?from=(\d+)".*>\s*<img src="http:\/\/.*.top.mail.ru\/counter/m
+			$1
+		when /<img src=['"]?http:\/\/top\.list\.ru\/counter\?id=(\d+)/
 			$1
 		when /_tmr.push\(\{id:\s*['"](\d+)['"]/
 			$1
@@ -23,6 +25,9 @@ class MailRu
 		return nil unless id
 		r = {:id => id}
 
+		#doc = download("http://top.mail.ru/visits?id=#{id}")
+
+		# Analyze daily report
 		doc = download("http://top.mail.ru/visits.csv?id=#{id}&period=0&date=&back=30&", 'windows-1251').split(/\n/)
 		return r if doc.empty?
 		doc = doc[4..-1]
@@ -36,11 +41,23 @@ class MailRu
 			sum_pv += pv.to_i
 		}
 
-		#doc = download("http://top.mail.ru/visits?id=#{id}")
-
 		r[:visitors_day] = sum_v / doc.size
 		r[:pv_day] = sum_pv / doc.size
-		r[:pv_mon] = sum_pv
+
+		# Analyze weekly report
+		doc = download("http://top.mail.ru/visits.csv?id=#{id}&period=1&date=&back=98&", 'windows-1251').split(/\n/)
+		return r if doc.empty?
+		date, v, new_v, core_v, hosts, pv, depth = doc[4].split(/;/)
+		r[:visitors_week] = v
+		r[:pv_week] = pv
+
+		# Analyze monthly report
+		doc = download("http://top.mail.ru/visits.csv?id=#{id}&period=2&date=&back=395&", 'windows-1251').split(/\n/)
+		return r if doc.empty?
+		date, v, new_v, core_v, hosts, pv, depth = doc[4].split(/;/)
+		r[:visitors_mon] = v
+		r[:pv_mon] = pv
+
 		return r
 	end
 end
