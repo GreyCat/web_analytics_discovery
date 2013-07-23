@@ -15,6 +15,9 @@ class LiveInternet
 		doc = download("http://www.liveinternet.ru/stat/#{host}/index.csv")
 		r[:pv_day], r[:visits_day], r[:visitors_day] = grab_psv(doc, 4)
 
+		# Bail out early if no LiveInternet data available
+		return r unless r[:pv_day]
+
 		doc = download("http://www.liveinternet.ru/stat/#{host}/index.csv?period=week;total=yes")
 		r[:pv_week], r[:visits_week], r[:visitors_week] = grab_psv(doc, 2)
 
