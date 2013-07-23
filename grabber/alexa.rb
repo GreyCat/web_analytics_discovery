@@ -39,6 +39,9 @@ class Alexa
 	end
 
 	def calc_values(r)
+		# Don't calculate anything if we have no info from Alexa
+		return r unless r[:visitors_mon_percent]
+
 		r[:visitors_mon] = (@big_val[:visitors_mon] / @big_perc[:visitors_mon_percent] * r[:visitors_mon_percent]).to_i
 		r[:pv_mon] = (@big_val[:pv_mon] / @big_perc[:pv_mon_percent] * r[:pv_mon_percent]).to_i
 
