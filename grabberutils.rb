@@ -1,3 +1,5 @@
+require 'fileutils'
+
 module GrabberUtils
 	CACHE_DIR = 'cache'
 	USER_AGENT = 'Mozilla/5.0 (Windows NT 6.1; rv:22.0) Gecko/20100101 Firefox/22.0'
