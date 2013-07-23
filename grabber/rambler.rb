@@ -1,4 +1,4 @@
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 
 require 'grabberutils'
 
@@ -17,6 +17,8 @@ class Rambler
 		when /<a href="http:\/\/top100\.rambler\.ru\/cgi-bin\/stats_top100\.cgi\?(\d+)"/
 			$1
 		when /<script.*src="http:\/\/counter\.rambler\.ru\/top100\.jcn\?(\d+)">/
+			$1
+                when /<img src="http:\/\/counter\.rambler\.ru\/top100\.cnt\?(\d+)"/
 			$1
 		else
 			nil
