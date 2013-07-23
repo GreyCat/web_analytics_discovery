@@ -22,4 +22,7 @@ Gem::Specification.new { |s|
   s.files = Dir.glob("lib/**/*.rb") + Dir.glob("bin/**") + %w{README.md}
 
   s.executables << 'web_analytics_discover'
+
+  s.add_development_dependency 'rake'
+  s.add_development_dependency 'rspec'
 }
