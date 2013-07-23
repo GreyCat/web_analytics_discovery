@@ -12,14 +12,11 @@ class Rambler
 
 	def find_id
 		case @page
-		when /_top100q.push\(\["setAccount", "(\d+)"\]\)/
-			$1
-		when /<a href="http:\/\/top100\.rambler\.ru\/cgi-bin\/stats_top100\.cgi\?(\d+)"/
-			$1
-		when /<script.*src="http:\/\/counter\.rambler\.ru\/top100\.jcn\?(\d+)">/
-			$1
-                when /<img src="http:\/\/counter\.rambler\.ru\/top100\.cnt\?(\d+)"/
-			$1
+		when /_top100q.push\(\["setAccount", "(\d+)"\]\)/,
+			/<a href="http:\/\/top100\.rambler\.ru\/cgi-bin\/stats_top100\.cgi\?(\d+)"/,
+			/<script.*src="http:\/\/counter\.rambler\.ru\/top100\.jcn\?(\d+)">/,
+			/<img src="http:\/\/counter\.rambler\.ru\/top100\.cnt\?(\d+)"/
+			$1.to_i
 		else
 			nil
 		end
