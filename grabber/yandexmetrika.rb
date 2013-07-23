@@ -33,6 +33,10 @@ class YandexMetrika
 		r[:visits_day] = do_list($1) if json =~ /visits:\[([0-9,]+)\]/
 		r[:visitors_day] = do_list($1) if json =~ /uniques:\[([0-9,]+)\]/
 
+		# Calculate approximations
+		r[:pv_week] = r[:pv_day] * 7 if r[:pv_day]
+		r[:pv_mon] = (r[:pv_day] * AVG_DAYS_IN_MONTH).to_i if r[:pv_day]
+
 		return r
 	end
 
