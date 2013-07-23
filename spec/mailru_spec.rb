@@ -17,4 +17,14 @@ describe MailRu do
     res[:id].should == 71642
     check_mailru(res)
   end
+  it 'should parse linux.org.ru' do
+    res = MailRu.new.run('http://lady.mail.ru/')
+    res[:id].should == 1018953
+    check_mailru(res)
+  end
+  it 'should parse lib.ru' do
+    res = MailRu.new.run('http://lib.ru/')
+    res[:id].should == 105282
+    check_mailru(res)
+  end
 end

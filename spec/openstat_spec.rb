@@ -16,4 +16,9 @@ describe Openstat do
     res[:id].should == 13838
     check_openstat(res)
   end
+  it 'should parse lib.ru' do
+    res = Openstat.new.run('http://lib.ru/')
+    res[:id].should == 8369
+    check_openstat(res)
+  end
 end
