@@ -1,4 +1,5 @@
 require 'fileutils'
+require 'digest/md5'
 
 module GrabberUtils
 	CACHE_DIR = 'cache'
@@ -28,7 +29,11 @@ module GrabberUtils
 	end
 
 	def mangle_url(url)
-		url.gsub(/[:\/]/, '_')
+		if url.length < 200
+			f = url.gsub(/[:\/]/, '_')
+		else
+			f = Digest::MD5.hexdigest(url)
+		end
 	end
 
 	# Average number of days per month
