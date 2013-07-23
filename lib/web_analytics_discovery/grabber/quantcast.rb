@@ -30,7 +30,7 @@ class Quantcast
 		doc = download(
 			"https://www.quantcast.com/api/profile/traffic/?&wUnit=#{id_encoded}&country=US&period=DAY30&countType=",
 			'UTF-8',
-			'Referer' => 'https://www.quantcast.com/#{host}',
+			'Referer' => "https://www.quantcast.com/#{host}",
 			'X-Requested-With' => 'XMLHttpRequest',
 		)
 
