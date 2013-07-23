@@ -23,6 +23,9 @@ class Alexa
 	def get_global_percents(host)
 		r = {}
 		doc = download("http://www.alexa.com/siteinfo/#{host}#trafficstats")
+		if doc =~ /<img src="http:\/\/traffic\.alexa\.com\/graph\?.*&u=([^"]+)">/
+			r[:id] = $1
+		end
 		if doc =~ /<table class="visitors_percent">(.*?)<\/table>/m
 			r[:visitors_week_percent], r[:visitors_mon_percent], r[:visitors_mon3_percent] = grab_percentages($1)
 		end
