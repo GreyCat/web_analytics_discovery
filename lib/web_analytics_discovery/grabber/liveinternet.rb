@@ -7,8 +7,19 @@ class LiveInternet
 	include GrabberUtils
 
 	def run(url)
-		uri = URI.parse(url)
-		run_id(uri.host)
+		@url = url
+		@page = download(url)
+		run_id(find_id)
+	end
+
+	def find_id
+		case @page
+		when /new Image\(\)\.src = "\/\/counter\.yadro\.ru\/hit;([^?"]+)\?/
+			$1
+		else
+			# Use hostname as a last resort measure
+			URI.parse(@url).host
+		end
 	end
 
 	def run_id(host)
