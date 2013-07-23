@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-def check_sanity(res)
+def check_openstat(res)
   res[:visitors_day].should_not be_nil
   res[:visits_day].should_not be_nil
   res[:pv_day].should_not be_nil
@@ -14,6 +14,6 @@ describe Openstat do
   it 'should parse utro.ru' do
     res = Openstat.new.run('http://utro.ru/')
     res[:id].should == 13838
-    check_sanity(res)
+    check_openstat(res)
   end
 end
