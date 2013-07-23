@@ -1,4 +1,4 @@
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 
 require 'uri'
 require 'web_analytics_discovery/grabberutils'
@@ -12,7 +12,7 @@ class LiveInternet
 	end
 
 	def run_id(host)
-		r = {}
+		r = {:id => host}
 
 		doc = download("http://www.liveinternet.ru/stat/#{host}/index.csv")
 		r[:pv_day], r[:visits_day], r[:visitors_day] = grab_psv(doc, 4)
