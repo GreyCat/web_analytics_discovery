@@ -4,6 +4,7 @@ require 'uri'
 require 'web_analytics_discovery/grabberutils'
 require 'web_analytics_discovery/grabber/openstat'
 
+module WebAnalyticsDiscovery
 class Alexa
 	include GrabberUtils
 
@@ -53,4 +54,5 @@ class Alexa
 
 		return r
 	end
+end
 end

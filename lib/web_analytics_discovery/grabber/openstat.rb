@@ -1,5 +1,6 @@
 require 'web_analytics_discovery/grabberutils'
 
+module WebAnalyticsDiscovery
 class Openstat
 	include GrabberUtils
 
@@ -39,4 +40,5 @@ class Openstat
 		}
 		return a
 	end
+end
 end

@@ -3,6 +3,7 @@
 require 'json'
 require 'web_analytics_discovery/grabberutils'
 
+module WebAnalyticsDiscovery
 class YandexMetrika
 	include GrabberUtils
 
@@ -49,4 +50,5 @@ class YandexMetrika
 		sum = els.inject { |a, b| a + b }
 		return sum / els.size
 	end
+end
 end

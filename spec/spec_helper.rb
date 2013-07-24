@@ -2,6 +2,7 @@ require 'rubygems'
 require 'bundler/setup'
 
 require 'web_analytics_discovery'
+include WebAnalyticsDiscovery
 
 RSpec.configure { |config|
   # some (optional) config here

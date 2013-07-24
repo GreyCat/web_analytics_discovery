@@ -2,6 +2,7 @@
 
 require 'web_analytics_discovery/grabberutils'
 
+module WebAnalyticsDiscovery
 class Rambler
 	include GrabberUtils
 
@@ -51,4 +52,5 @@ class Rambler
 
 		return r
 	end
+end
 end

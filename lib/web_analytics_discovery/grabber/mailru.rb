@@ -1,5 +1,6 @@
 require 'web_analytics_discovery/grabberutils'
 
+module WebAnalyticsDiscovery
 class MailRu
 	include GrabberUtils
 
@@ -58,4 +59,5 @@ class MailRu
 
 		return r
 	end
+end
 end

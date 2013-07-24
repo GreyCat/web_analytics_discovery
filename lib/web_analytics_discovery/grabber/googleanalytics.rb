@@ -1,5 +1,6 @@
 require 'web_analytics_discovery/grabberutils'
 
+module WebAnalyticsDiscovery
 class GoogleAnalytics
 	include GrabberUtils
 
@@ -24,4 +25,5 @@ class GoogleAnalytics
 		r = {:id => id}
 		return r
 	end
+end
 end

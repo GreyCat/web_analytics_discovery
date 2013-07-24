@@ -5,6 +5,7 @@ require 'uri'
 require 'json'
 require 'web_analytics_discovery/grabberutils'
 
+module WebAnalyticsDiscovery
 class Quantcast
 	include GrabberUtils
 
@@ -44,4 +45,5 @@ class Quantcast
 
 		return r
 	end
+end
 end

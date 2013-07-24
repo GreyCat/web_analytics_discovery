@@ -3,6 +3,7 @@
 require 'uri'
 require 'web_analytics_discovery/grabberutils'
 
+module WebAnalyticsDiscovery
 class LiveInternet
 	include GrabberUtils
 
@@ -56,4 +57,5 @@ class LiveInternet
 		}
 		return r
 	end
+end
 end
