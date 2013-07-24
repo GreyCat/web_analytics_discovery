@@ -66,3 +66,53 @@ Example:
     quantcast           |                wd:ru.kp|        N/A|        N/A|        N/A|      36300|        N/A|        N/A
     rambler             |                   17841|    1048235|    1287761|    3015270|   15550162|   31307958|   75869606
     yandexmetrika       |                 1051362|     259987|     310983|     727833|        N/A|        N/A|   22153416
+
+## API usage
+
+One can easily use web analytics discovery using simple API. Every web
+analytics service is supported by a separate class named after that
+service in `WebAnalyticsDiscovery` module:
+
+* `Alexa`
+* `GoogleAnalytics`
+* `LiveInternet`
+* `MailRu`
+* `Openstat`
+* `Quantcast`
+* `Rambler`
+* `YandexMetrika`
+
+One can use it like that:
+
+    require 'web_analytics_discovery'
+    d = WebAnalyticsDiscovery::MailRu.new
+    result = d.run('http://kp.ru/')
+
+`result` will look like that:
+
+    {:id=>294001,
+     :visitors_day=>756600,
+     :pv_day=>2230674,
+     :visitors_week=>3365344,
+     :pv_week=>13102096,
+     :visitors_mon=>15086634,
+     :pv_mon=>73738178}
+
+Some values might be missing if it's not possible to retrieve them
+from a given service.
+
+## Licensing and usage
+
+Copyright (C) 2013  Mikhail Yakshin <greycat@altlinux.org>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as
+published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+Affero General Public License for more details.
+
+Please consult LICENSE file for more details and full license text.
