@@ -6,6 +6,8 @@ module WebAnalyticsDiscovery
 class Rambler
 	include GrabberUtils
 
+	SEC_PER_DAY = 24 * 60 * 60
+
 	def run(url)
 		@page = download(url)
 		run_id(find_id)
@@ -50,7 +52,49 @@ class Rambler
 			r[:pv_mon] = $6.to_i
 		end
 
+		# Plan B: if proper CSV export failed, we'll try to look up information in rating catalogue
+		unless r[:visitors_day]
+			now = Time.now
+			r[:visitors_day], r[:pv_day] = parse_rating_table("http://top100.rambler.ru/?range=#{spec_yesterday(now)}&stat=1&statcol=1%2C2&query=#{id}", id)
+			r[:visitors_week], r[:pv_week] = parse_rating_table("http://top100.rambler.ru/?range=#{spec_last_week(now)}&stat=1&statcol=1%2C2&query=#{id}", id)
+			r[:visitors_mon], r[:pv_mon] = parse_rating_table("http://top100.rambler.ru/?range=#{spec_last_month(now)}&stat=1&statcol=1%2C2&query=#{id}", id)
+		end
+
 		return r
+	end
+
+	def parse_rating_table(url, id)
+		doc = download(url)
+		if doc =~ /<tr>(\s*<td align="right">.*?<a href="\/resStats\/#{id}\/.*?)<\/tr>/m
+			table_row = $1
+			if table_row =~ /<td align="right">([0-9&nbsp;]+)<\/td>\s*<td class="last" align="right">([0-9&nbsp;]+)<\/td>/m
+				v = $1
+				pv = $2
+				v = v.gsub(/&nbsp;/, '').to_i
+				pv = pv.gsub(/&nbsp;/, '').to_i
+				return [v, pv]
+			end
+		end
+		return [nil, nil]
+	end
+
+	def spec_yesterday(now)
+		(now - SEC_PER_DAY).strftime('%d.%m.%Y')
+	end
+
+	def spec_last_week(now)
+		wday = now.wday
+		wday = 7 if wday == 0
+		end_week = now - (wday * SEC_PER_DAY)
+		start_week = end_week - 6 * SEC_PER_DAY
+		"#{start_week.strftime('%d.%m.%Y')}+-+#{end_week.strftime('%d.%m.%Y')}"
+	end
+
+	def spec_last_month(now)
+		this_month_1 = Time.new(now.year, now.month, 1)
+		last_month_end = this_month_1 - SEC_PER_DAY
+		last_month_start = Time.new(last_month_end.year, last_month_end.month, 1)
+		"#{last_month_start.strftime('%d.%m.%Y')}+-+#{last_month_end.strftime('%d.%m.%Y')}"
 	end
 end
 end
