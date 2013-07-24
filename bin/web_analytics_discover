@@ -6,6 +6,7 @@ require 'fileutils'
 require 'uri'
 
 require 'web_analytics_discovery'
+include WebAnalyticsDiscovery
 
 class AnalyticsGrabber
 	def self.run(url)
