@@ -24,6 +24,11 @@ class Alexa
 	def get_global_percents(host)
 		r = {}
 		doc = download("http://www.alexa.com/siteinfo/#{host}#trafficstats")
+
+		# Try to extract certified metrics first
+		r[:visitors_day], r[:pv_day], r[:visitors_mon], r[:pv_mon] = grab_certified_metrics(doc)
+
+		# Try percentages if not certified - it's better than nothing
 		if doc =~ /<img src="http:\/\/traffic\.alexa\.com\/graph\?.*&u=([^"]+)">/
 			r[:id] = $1
 		end
@@ -36,6 +41,13 @@ class Alexa
 		return r
 	end
 
+	def grab_certified_metrics(doc)
+		r = []
+		doc.gsub(/<strong class="font-big2">([0-9,]+)<\/strong>/) { r << $1 }
+		r.map! { |x| x.gsub(/,/, '').to_i }
+		return r
+	end
+
 	def grab_percentages(doc)
 		r = []
 		doc.gsub(/<td class="avg ">([0-9.]+)%<\/td>/) { |x| r << $1.to_f }
@@ -45,6 +57,9 @@ class Alexa
 	def calc_values(r)
 		# Don't calculate anything if we have no info from Alexa
 		return r unless r[:visitors_mon_percent]
+
+		# Don't calculate anything if we have true certified data
+		return r if r[:visitors_day]
 
 		r[:visitors_mon] = (@big_val[:visitors_mon] / @big_perc[:visitors_mon_percent] * r[:visitors_mon_percent]).to_i
 		r[:pv_mon] = (@big_val[:pv_mon] / @big_perc[:pv_mon_percent] * r[:pv_mon_percent]).to_i
