@@ -47,15 +47,15 @@ class MailRu
 		doc = download("http://top.mail.ru/visits.csv?id=#{id}&period=1&date=&back=98&", 'windows-1251').split(/\n/)
 		return r if doc.empty?
 		date, v, new_v, core_v, hosts, pv, depth = doc[4].split(/;/)
-		r[:visitors_week] = v
-		r[:pv_week] = pv
+		r[:visitors_week] = v.to_i
+		r[:pv_week] = pv.to_i
 
 		# Analyze monthly report
 		doc = download("http://top.mail.ru/visits.csv?id=#{id}&period=2&date=&back=395&", 'windows-1251').split(/\n/)
 		return r if doc.empty?
 		date, v, new_v, core_v, hosts, pv, depth = doc[4].split(/;/)
-		r[:visitors_mon] = v
-		r[:pv_mon] = pv
+		r[:visitors_mon] = v.to_i
+		r[:pv_mon] = pv.to_i
 
 		return r
 	end
