@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 require 'web_analytics_discovery/grabberutils'
 
 module WebAnalyticsDiscovery
@@ -29,7 +31,7 @@ class MailRu
 
 		# Analyze daily report
 		doc = download("http://top.mail.ru/visits.csv?id=#{id}&period=0&date=&back=30&", 'windows-1251').split(/\n/)
-		return r if doc.empty?
+		return run_id_html_rating(r, id) if doc.empty?
 		doc = doc[4..-1]
 
 		sum_v = 0
@@ -57,6 +59,29 @@ class MailRu
 		date, v, new_v, core_v, hosts, pv, depth = doc[4].split(/;/)
 		r[:visitors_mon] = v.to_i
 		r[:pv_mon] = pv.to_i
+
+		return r
+	end
+
+	# Parse semi-closed rating when normal full CSV export is not available
+	def run_id_html_rating(r, id)
+		doc = download("http://top.mail.ru/rating?id=#{id}", 'windows-1251')
+
+		today = []
+		doc.gsub(/<td class="l_col">Сегодня<\/td>.*?<td class="r_col"><b>([0-9,]+)<\/b>/m) { today << $1.gsub(/,/, '').to_i }
+
+		week = []
+		doc.gsub(/<td class="l_col">Неделя<\/td>.*?<td class="r_col"><b>([0-9,]+)<\/b>/m) { week << $1.gsub(/,/, '').to_i }
+
+		month = []
+		doc.gsub(/<td class="l_col">Месяц<\/td>.*?<td class="r_col"><b>([0-9,]+)<\/b>/m) { month << $1.gsub(/,/, '').to_i }
+
+		# Non-normal number of matches? That's weird, bail out
+		return r unless today.length == 3 and week.length == 3 and month.length == 3
+
+		r[:visitors_day], r[:pv_day], r[:ip_day] = today
+		r[:visitors_week], r[:pv_week], r[:ip_week] = week
+		r[:visitors_mon], r[:pv_mon], r[:ip_mon] = month
 
 		return r
 	end
