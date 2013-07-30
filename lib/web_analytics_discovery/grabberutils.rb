@@ -5,6 +5,8 @@ module GrabberUtils
 	CACHE_DIR = 'cache'
 	USER_AGENT = 'Mozilla/5.0 (Windows NT 6.1; rv:22.0) Gecko/20100101 Firefox/22.0'
 
+	class DownloadError < Exception; end
+
 	def download(url, encoding = 'UTF-8', options = {})
 		FileUtils.mkdir_p(CACHE_DIR)
 		fn = CACHE_DIR + '/' + mangle_url(url)
@@ -18,8 +20,11 @@ module GrabberUtils
 				opt['referer'] = options['Referer']
 			end
 			opt = opt.map { |k, v| "--#{k}='#{v}'" }.join(' ')
-			system("wget --debug --append-output=wget.log --keep-session-cookies -O'#{fn}' #{opt} '#{url}'")
-			raise 'Download error' if $?.exitstatus != 0
+			system("wget --append-output=wget.log --keep-session-cookies -O'#{fn}' #{opt} '#{url}'")
+			if $?.exitstatus != 0
+				File.delete(fn)
+				raise DownloadError.new
+			end
 		end
 
 		# Truly horrible hack to work around Ruby 1.9.2+ strict handling of invalid UTF-8 characters
