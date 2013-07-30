@@ -13,6 +13,7 @@ class MailRu
 		case @page
 		when /<a [^>]*href="http:\/\/top\.mail\.ru\/jump\?from=(\d+)".*>\s*<img src="http:\/\/.*.top.mail.ru\/counter/m,
 			/<img src=['"]?http:\/\/top\.list\.ru\/counter\?id=(\d+)/,
+			/<img src=['"]?http:\/\/.*top\.mail\.ru\/counter\?js=na;id=(\d+)/,
 			/_tmr.push\(\{id:\s*['"](\d+)['"]/
 			$1.to_i
 		else
