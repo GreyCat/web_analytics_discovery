@@ -44,4 +44,20 @@ describe Rambler do
     res[:visitors_mon].should_not be_nil
     res[:pv_mon].should_not be_nil
   end
+  it 'should parse ridus.ru' do
+    res = Rambler.new.run('http://ridus.ru/')
+
+    res.should_not be_nil
+
+    res[:id].should == 2564083
+
+    res[:visitors_day].should_not be_nil
+    res[:pv_day].should_not be_nil
+
+    res[:visitors_week].should_not be_nil
+    res[:pv_week].should_not be_nil
+
+    res[:visitors_mon].should_not be_nil
+    res[:pv_mon].should_not be_nil
+  end
 end
