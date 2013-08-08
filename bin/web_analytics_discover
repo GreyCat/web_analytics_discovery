@@ -8,21 +8,16 @@ require 'web_analytics_discovery'
 include WebAnalyticsDiscovery
 
 class AnalyticsGrabber
-	def self.run(url)
-		r = {
-			:alexa => Alexa.new.run(url),
-			:googleanalytics => GoogleAnalytics.new.run(url),
-			:liveinternet => LiveInternet.new.run(url),
-			:mailru => MailRu.new.run(url),
-			:openstat => Openstat.new.run(url),
-			:quantcast => Quantcast.new.run(url),
-			:rambler => Rambler.new.run(url),
-			:tns => TNS.new.run(url),
-			:yandexmetrika => YandexMetrika.new.run(url),
-		}
+	def initialize
+		@services = {}
+		SERVICES.each_pair { |name, klass| @services[name] = klass.new }
 	end
 
-	def self.pp(url)
+	def run(url)
+		Hash[@services.map { |name, service| [name, service.run(url)] }]
+	end
+
+	def pp(url)
 		r = run(url)
 		print_line ['', 'id', 'v/day', 's/day', 'pv/day', 'v/mon', 's/mon', 'pv/mon']
 		r.keys.sort.each { |service|
@@ -41,7 +36,7 @@ class AnalyticsGrabber
 		}
 	end
 
-	def self.print_line(a)
+	def print_line(a)
 		printf '%-20s', a.shift
 		printf '|%24s', a.shift
 		a.each { |x|
@@ -60,4 +55,5 @@ OptionParser.new { |opts|
 	opts.on_tail('-h', '--help', 'Show this message') { puts opts; exit }
 }.parse!
 
-ARGV.each { |a| AnalyticsGrabber.pp(a) }
+ag = AnalyticsGrabber.new
+ARGV.each { |a| ag.pp(a) }
