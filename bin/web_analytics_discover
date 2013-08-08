@@ -25,7 +25,8 @@ class AnalyticsGrabber
 	def self.pp(url)
 		r = run(url)
 		print_line ['', 'id', 'v/day', 's/day', 'pv/day', 'v/mon', 's/mon', 'pv/mon']
-		r.each_pair { |service, res|
+		r.keys.sort.each { |service|
+			res = r[service]
 			next unless res
 			print_line [
 				service,
