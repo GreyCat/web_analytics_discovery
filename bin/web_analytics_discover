@@ -18,6 +18,7 @@ class AnalyticsGrabber
 			:openstat => Openstat.new.run(url),
 			:quantcast => Quantcast.new.run(url),
 			:rambler => Rambler.new.run(url),
+			:tns => TNS.new.run(url),
 			:yandexmetrika => YandexMetrika.new.run(url),
 		}
 	end
