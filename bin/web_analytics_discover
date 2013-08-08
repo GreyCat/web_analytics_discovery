@@ -1,9 +1,8 @@
 #!/usr/bin/env ruby
 
-$LOAD_PATH << '../lib'
-
 require 'fileutils'
 require 'uri'
+require 'optparse'
 
 require 'web_analytics_discovery'
 include WebAnalyticsDiscovery
@@ -50,5 +49,14 @@ class AnalyticsGrabber
 		puts
 	end
 end
+
+options = {}
+OptionParser.new { |opts|
+	opts.banner = "Usage: #{__FILE__} [options] <urls>"
+
+#	opts.on('-v', '--[no-]verbose', 'Verbose logging') { |v| options[:verbose] = v }
+
+	opts.on_tail('-h', '--help', 'Show this message') { puts opts; exit }
+}.parse!
 
 ARGV.each { |a| AnalyticsGrabber.pp(a) }
