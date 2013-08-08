@@ -8,6 +8,16 @@ module GrabberUtils
 	class DownloadError < Exception; end
 
 	def download(url, encoding = 'UTF-8', options = {})
+		fn = download_file(url, options)
+
+		# Truly horrible hack to work around Ruby 1.9.2+ strict handling of invalid UTF-8 characters
+		s = File.read(fn)
+		s.encode!('UTF-16', encoding, :invalid => :replace, :replace => '?')
+		s.encode!('UTF-8', 'UTF-16', :invalid => :replace, :replace => '?')
+	end
+
+	# Downloads a file, returns filename in cache directory
+	def download_file(url, options = {})
 		FileUtils.mkdir_p(CACHE_DIR)
 		fn = CACHE_DIR + '/' + mangle_url(url)
 		unless FileTest.exists?(fn)
@@ -27,10 +37,7 @@ module GrabberUtils
 			end
 		end
 
-		# Truly horrible hack to work around Ruby 1.9.2+ strict handling of invalid UTF-8 characters
-		s = File.read(fn)
-		s.encode!('UTF-16', encoding, :invalid => :replace, :replace => '?')
-		s.encode!('UTF-8', 'UTF-16', :invalid => :replace, :replace => '?')
+		return fn
 	end
 
 	def mangle_url(url)
