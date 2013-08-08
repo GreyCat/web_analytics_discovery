@@ -1,10 +1,11 @@
 # -*- encoding: utf-8 -*-
 
+require File.expand_path("../lib/web_analytics_discovery/version", __FILE__)
 require 'date'
 
 Gem::Specification.new { |s|
   s.name = 'web_analytics_discovery'
-  s.version = '0.1'
+  s.version = WebAnalyticsDiscovery::VERSION
   s.date = Date.today.to_s
 
   s.authors = ['Mikhail Yakshin']
