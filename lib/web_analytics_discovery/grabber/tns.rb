@@ -94,13 +94,9 @@ class TNS
 	end
 
 	def run_id(id)
-		return nil unless id
-		r = {:id => id}
-
 		parse_report unless @report
-		r[:visitors_mon] = @report[id]
-
-		return r
+		v = @report[id]
+		return v ? {:id => id, :visitors_mon => v} : nil
 	end
 end
 end
