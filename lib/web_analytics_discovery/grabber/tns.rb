@@ -43,7 +43,10 @@ class TNS
 			next if c[1].empty?
 
 			# Downcase URL and calculate proper monthly visitors
-			@report[c[1].downcase] = (c[2].to_f * 1000).to_i
+			visitors = (c[2].to_f * 1000).to_i
+			url = c[1].downcase.gsub(/ \(сайт\)$/, '')
+
+			@report[url] = visitors
 		}
 	end
 
