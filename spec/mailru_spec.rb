@@ -18,9 +18,9 @@ def check_mailru(res)
 end
 
 describe MailRu do
-  it 'should parse linux.org.ru' do
-    res = MailRu.new.run('http://linux.org.ru/')
-    res[:id].should == 71642
+  it 'should parse bash.im' do
+    res = MailRu.new.run('http://bash.im/')
+    res[:id].should == 901403
     check_mailru(res)
   end
   it 'should parse lady.mail.ru' do
@@ -31,12 +31,6 @@ describe MailRu do
   it 'should parse lib.ru' do
     res = MailRu.new.run('http://lib.ru/')
     res[:id].should == 105282
-    check_mailru(res)
-  end
-  it 'should parse ag.ru' do
-    # strange counter code, semi-closed statistics
-    res = MailRu.new.run('http://ag.ru/')
-    res[:id].should == 15162
     check_mailru(res)
   end
 end
