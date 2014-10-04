@@ -22,10 +22,10 @@ describe Rambler do
     Rambler.new.spec_last_month(Time.new(2013, 5, 31)).should == '01.04.2013+-+30.04.2013'
     Rambler.new.spec_last_month(Time.new(2012, 3, 3)).should == '01.02.2012+-+29.02.2012'
   end
-  it 'should parse linux.org.ru' do
-    res = Rambler.new.run('http://linux.org.ru/')
+  it 'should parse livejournal.com' do
+    res = Rambler.new.run('http://www.livejournal.com/')
     full_result_check(res)
-    res[:id].should == 29833
+    res[:id].should == 1111412
   end
   it 'should parse sport.ru' do
     # Hidden statistics site, information is available only from rating, no session info available
