@@ -23,7 +23,7 @@ describe MailRu do
     res[:id].should == 71642
     check_mailru(res)
   end
-  it 'should parse linux.org.ru' do
+  it 'should parse lady.mail.ru' do
     res = MailRu.new.run('http://lady.mail.ru/')
     res[:id].should == 1018953
     check_mailru(res)
