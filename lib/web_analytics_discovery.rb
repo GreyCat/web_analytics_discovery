@@ -19,5 +19,5 @@ module WebAnalyticsDiscovery
 		else
 			nil
 		end
-	}]
+	}.delete_if { |v| v.nil? }]
 end
