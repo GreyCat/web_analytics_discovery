@@ -53,7 +53,8 @@ using API.
 
 * Clone this repository / download snapshot
 * `gem build web_analytics_discovery.gemspec`
-* `gem install ./web_analytics_discovery-*.gem`
+* `gem install --local ./web_analytics_discovery-*.gem` (usually as
+  root, if you need system-wide installation)
 
 ## Basic usage
 
