@@ -10,11 +10,29 @@ include WebAnalyticsDiscovery
 class AnalyticsGrabber
 	def initialize
 		@services = {}
-		SERVICES.each_pair { |name, klass| @services[name] = klass.new }
+		SERVICES.each_pair { |name, klass|
+			begin
+				@services[name] = klass.new
+			rescue Exception => ex
+				warn "Unable to start analytics service #{name}"
+				$stderr.puts ex.message
+				$stderr.puts ex.backtrace.join("\n")
+			end
+		}
 	end
 
 	def run(url)
-		Hash[@services.map { |name, service| [name, service.run(url)] }]
+		r = {}
+		@services.each_pair { |name, service|
+			begin
+				r[name] = service.run(url)
+			rescue Exception => ex
+				warn "Exception querying analytics service #{name}"
+				$stderr.puts ex.message
+				$stderr.puts ex.backtrace.join("\n")
+			end
+		}
+		r
 	end
 
 	def pp(url)
