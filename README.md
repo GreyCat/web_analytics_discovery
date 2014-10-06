@@ -44,8 +44,16 @@ using API.
 
 ## Installation
 
-* Make sure you have Ruby and Rubygems
+### From RubyGems repository
+
+* Make sure you have Ruby and RubyGems
 * Just run `gem install web_analytics_discovery`
+
+### Manually from source
+
+* Clone this repository / download snapshot
+* `gem build web_analytics_discovery.gemspec`
+* `gem install ./web_analytics_discovery-*.gem`
 
 ## Basic usage
 
