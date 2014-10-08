@@ -40,7 +40,7 @@ class TNS
 	# with external utility.
 	#
 	# 5. Parse resulting CSV report into memory (it's relatively
-	# short - as of 2014-10, TNS lists only 
+	# short - as of 2014-10, TNS lists only ~500 sites)
 	def parse_report
 		report_url = query_directory
 		zipped = download_file(report_url)
