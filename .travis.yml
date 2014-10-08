@@ -6,4 +6,4 @@ before_install:
 # It would have been as easy as this if TravisCI was running somewhat more modern than ancient Ubuntu 12.04 LTS :(
 #  - sudo apt-get update -qq
 #  - sudo apt-get install -y xlsx2csv unzip
-  - pip install xlsx2csv
+  - sudo pip install xlsx2csv
