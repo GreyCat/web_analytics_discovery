@@ -19,7 +19,8 @@ module GrabberUtils
 	# Downloads a file, returns filename in cache directory
 	def download_file(url, options = {})
 		FileUtils.mkdir_p(CACHE_DIR)
-		fn = CACHE_DIR + '/' + mangle_url(url)
+		localfile = options['localfile'] || mangle_url(url)
+		fn = CACHE_DIR + '/' + localfile
 		unless FileTest.exists?(fn)
 			opt = {
 				'user-agent' => USER_AGENT,
