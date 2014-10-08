@@ -24,8 +24,26 @@ class TNS
 		end
 	end
 
+	# Parsing TNS report involves the following stages:
+	#
+	# 1. Download non-empty "directory" page from their web site
+	# for a current year (keep requesting older years if we keep
+	# getting empty output, bail out on HTTP error)
+	#
+	# 2. Download first (most recent) report listed on that "directory" page
+	#
+	# 3. Unpack (unzip) downloaded report file; it's a zip that
+	# contains multiple files, including single .xlsx file with
+	# raw data.
+	#
+	# 4. Convert .xlsx file into something more readable (CSV)
+	# with external utility.
+	#
+	# 5. Parse resulting CSV report into memory (it's relatively
+	# short - as of 2014-10, TNS lists only 
 	def parse_report
-		zipped = ensure_download
+		report_url = query_directory
+		zipped = download_file(report_url)
 		unzipped = ensure_unpack(zipped)
 		converted = ensure_convert(unzipped)
 
@@ -52,22 +70,16 @@ class TNS
 
 	MAX_TRIES = 5
 
-	def ensure_download
-		date = Date.today.prev_month
-
+	def query_directory
+		y = Date.today.year
 		MAX_TRIES.times {
-			begin
-				fn = download_file(TNS.url_for_report(date))
-				return fn
-			rescue DownloadError
-				# ignore, we'll try another month
+			dir = download("http://www.tns-global.ru/services/media/media-audience/internet/information/?arrFilter_pf%5BYEAR%5D=#{y}&set_filter=%D0%9F%D0%BE%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C&set_filter=Y")
+			if dir =~ /<a href="(\/services\/media\/media-audience\/internet\/information\/\?download=\d+&date=.*?)">/
+				return "http://www.tns-global.ru#{$1}"
 			end
-			date = date.prev_month
+			y -= 1
 		}
-	end
-
-	def self.url_for_report(date)
-		date.strftime('http://www.tns-global.ru/media/content/B7525726-B5E1-4C12-BE25-4C543F42F3EE/!Web%%20Index%%20Report%%20%Y%m.zip')
+		raise 'Unable to query report directory - not a single report found'
 	end
 
 	def ensure_unpack(zipped)
