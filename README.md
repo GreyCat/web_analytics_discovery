@@ -1,4 +1,10 @@
 # web_analytics_discovery
+<!--[![Gem Version](https://badge.fury.io/rb/web_analytics_discovery.png)](http://badge.fury.io/rb/web_analytics_discovery)-->
+<!--[![Build Status](https://secure.travis-ci.org/GreyCat/web_analytics_discovery.png)](http://travis-ci.org/GreyCat/web_analytics_discovery)-->
+<!--[![Dependency Status](https://gemnasium.com/GreyCat/web_analytics_discovery.png)](https://gemnasium.com/GreyCat/web_analytics_discovery)-->
+[![Code Climate](https://codeclimate.com/github/GreyCat/web_analytics_discovery/badges/gpa.svg)](https://codeclimate.com/github/GreyCat/web_analytics_discovery)
+<!--[![Coverage Status](https://coveralls.io/repos/GreyCat/web_analytics_discovery/badge.png?branch=master)](https://coveralls.io/r/GreyCat/web_analytics_discovery)-->
+<!--[![Security Status](http://rails-brakeman.com/GreyCat/web_analytics_discovery.png)](http://rails-brakeman.com/GreyCat/web_analytics_discovery)-->
 
 This gem provides a set of tools for discovery and export of data from
 popular web analytics tools.
