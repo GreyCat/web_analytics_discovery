@@ -69,7 +69,7 @@ class Quantcast
 			"https://www.quantcast.com/api/profile/traffic/?&wUnit=#{id_encoded}&country=#{country}&period=#{period}&countType=",
 			'UTF-8',
 			'Referer' => "https://www.quantcast.com/#{host}?country=#{country}",
-			'X-Requested-With' => 'XMLHttpRequest',
+			'X-Requested-With' => 'XMLHttpRequest'
 		)
 		return JSON.load(doc).first
 	end
