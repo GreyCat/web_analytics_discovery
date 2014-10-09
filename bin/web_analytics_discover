@@ -70,6 +70,7 @@ OptionParser.new { |opts|
 
 #	opts.on('-v', '--[no-]verbose', 'Verbose logging') { |v| options[:verbose] = v }
 
+	opts.on_tail('--version', 'Show version') { puts "Web Analytics Discovery v#{VERSION}"; exit }
 	opts.on_tail('-h', '--help', 'Show this message') { puts opts; exit }
 }.parse!
 
