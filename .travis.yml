@@ -1,7 +1,7 @@
 language: ruby
 rvm:
   - 2.1.2
-  - ree
+  - 1.9.3
 before_install:
 # It would have been as easy as this if TravisCI was running somewhat more modern than ancient Ubuntu 12.04 LTS :(
 #  - sudo apt-get update -qq
