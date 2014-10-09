@@ -43,7 +43,7 @@ class Alexa
 
 	def grab_certified_metrics(doc)
 		r = []
-		doc.gsub(/<strong class="font-big2">([0-9,]+)<\/strong>/) { r << $1 }
+		doc.gsub(/<strong class="metrics-data">([0-9,]+)<\/strong>/) { r << $1 }
 		r.map! { |x| x.gsub(/,/, '').to_i }
 		return r
 	end

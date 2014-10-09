@@ -10,9 +10,9 @@ describe Alexa do
     res[:pv_mon].should_not be_nil
   end
 
-  it 'should parse dealfish.co.th directly' do
-    res = Alexa.new.run('http://dealfish.co.th/')
-    res[:id].should == 'dealfish.co.th'
+  it 'should parse alexa.com with certified metrics' do
+    res = Alexa.new.run('http://alexa.com/')
+    res[:id].should == 'alexa.com'
 
     res[:visitors_day].should_not be_nil
     res[:pv_day].should_not be_nil
