@@ -1,5 +1,5 @@
 # web_analytics_discovery
-<!--[![Gem Version](https://badge.fury.io/rb/web_analytics_discovery.png)](http://badge.fury.io/rb/web_analytics_discovery)-->
+[![Gem Version](https://badge.fury.io/rb/web_analytics_discovery.svg)](http://badge.fury.io/rb/web_analytics_discovery)
 [![Build Status](https://travis-ci.org/GreyCat/web_analytics_discovery.svg?branch=master)](https://travis-ci.org/GreyCat/web_analytics_discovery)
 [![Dependency Status](https://gemnasium.com/GreyCat/web_analytics_discovery.svg)](https://gemnasium.com/GreyCat/web_analytics_discovery)
 [![Code Climate](https://codeclimate.com/github/GreyCat/web_analytics_discovery/badges/gpa.svg)](https://codeclimate.com/github/GreyCat/web_analytics_discovery)
