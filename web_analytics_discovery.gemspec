@@ -24,16 +24,9 @@ It works by analyzing site pages, finding snippets of popular web
 analytics systems there, extracting their IDs and then automatically
 querying that systems for publically available data.
 
-The supported web analytics systems are:
-
-* Alexa
-* Google Analytics
-* LiveInternet
-* Mail.ru
-* Openstat
-* Quantcast
-* Rambler Top100
-* Yandex Metrika
+The supported web analytics systems are: Alexa, Google Analytics,
+LiveInternet, Mail.ru, Openstat, Quantcast, Rambler Top100, Yandex
+Metrika.
 EOF
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
