@@ -3,11 +3,11 @@ require 'spec_helper'
 describe Alexa do
   it 'should parse alexa.com with certified metrics' do
     res = Alexa.new.run('http://alexa.com/')
-    res[:id].should == 'alexa.com'
+    expect(res[:id]).to eq('alexa.com')
 
-    res[:visitors_day].should_not be_nil
-    res[:pv_day].should_not be_nil
-    res[:visitors_mon].should_not be_nil
-    res[:pv_mon].should_not be_nil
+    expect(res[:visitors_day]).not_to be_nil
+    expect(res[:pv_day]).not_to be_nil
+    expect(res[:visitors_mon]).not_to be_nil
+    expect(res[:pv_mon]).not_to be_nil
   end
 end
