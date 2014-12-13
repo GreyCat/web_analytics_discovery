@@ -18,7 +18,7 @@ class Rambler
 		when /_top100q.push\(\["setAccount", "(\d+)"\]\)/,
 			/<a href="http:\/\/top100\.rambler\.ru\/cgi-bin\/stats_top100\.cgi\?(\d+)"/,
 			/<script.*src="http:\/\/counter\.rambler\.ru\/top100\.jcn\?(\d+)/,
-			/<img src="http:\/\/counter\.rambler\.ru\/top100\.cnt\?(\d+)"/
+			/<img src="(?:http:)?\/\/counter\.rambler\.ru\/top100\.cnt\?(\d+)"/
 			$1.to_i
 		else
 			nil
