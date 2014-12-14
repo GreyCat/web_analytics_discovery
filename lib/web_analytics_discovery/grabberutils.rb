@@ -27,11 +27,30 @@ module GrabberUtils
 				'load-cookies' => 'cookies.txt',
 				'save-cookies' => 'cookies.txt',
 			}
+
 			if options['Referer']
 				opt['referer'] = options['Referer']
 			end
-			opt = opt.map { |k, v| "--#{k}='#{v}'" }.join(' ')
-			system("wget --append-output=wget.log --keep-session-cookies -O'#{fn}' #{opt} '#{url}'")
+
+			case WebAnalyticsDiscovery::download_debug
+			when :file
+				opt['append-output'] = 'wget.log'
+			when :stdout
+				# default, do nothing
+			when :ignore
+				opt['quiet'] = true
+			else
+				raise "Invalid value for download_debug: #{@download_debug.inspect}"
+			end
+
+			opt = opt.map { |k, v|
+				if v == true
+					"--#{k}"
+				else
+					"--#{k}='#{v}'"
+				end
+			}.join(' ')
+			system("wget --keep-session-cookies -O'#{fn}' #{opt} '#{url}'")
 			if $?.exitstatus != 0
 				File.delete(fn)
 				raise DownloadError.new

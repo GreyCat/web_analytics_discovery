@@ -20,4 +20,18 @@ module WebAnalyticsDiscovery
 			nil
 		end
 	}.delete_if { |v| v.nil? }]
+
+	# Set whatever we should do with download debugging output. Recognized values are:
+	# * :ignore - ignores downloader output completely
+	# * :stdout - dumps it normally to stdout
+	# * :file - dumps it into 'wget.log' file
+	@@download_debug = :file
+
+	def self::download_debug
+		@@download_debug
+	end
+
+	def self::download_debug=(x)
+		@@download_debug = x
+	end
 end
