@@ -74,6 +74,9 @@ class TNS
 		y = Date.today.year
 		MAX_TRIES.times {
 			dir = download("http://www.tns-global.ru/services/media/media-audience/internet/information/?arrFilter_pf%5BYEAR%5D=#{y}&set_filter=%D0%9F%D0%BE%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C&set_filter=Y")
+
+			raise 'Unable to query TNS reports - download site seems to be down' if dir =~ /<b>DB query error.<\/b>/
+
 			if dir =~ /<a href="(\/services\/media\/media-audience\/internet\/information\/\?download=\d+&date=.*?)">/
 				return "http://www.tns-global.ru#{$1}"
 			end
