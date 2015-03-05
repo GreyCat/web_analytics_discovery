@@ -18,9 +18,9 @@ def check_mailru(res)
 end
 
 describe Quantcast do
-  it 'should parse linkedin.com directly' do
-    res = Quantcast.new.run('http://linkedin.com/')
-    expect(res[:id]).to eq('wd:com.linkedin')
+  it 'should parse photobucket.com directly' do
+    res = Quantcast.new.run('http://photobucket.com/')
+    expect(res[:id]).to eq('wd:com.photobucket')
 
     expect(res[:visitors_day]).not_to be_nil
     expect(res[:visitors_day]).to be_an(Integer)
