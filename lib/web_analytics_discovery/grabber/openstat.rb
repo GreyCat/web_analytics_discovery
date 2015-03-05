@@ -14,7 +14,7 @@ class Openstat
 	def find_id
 		case @page
 		when /<span id="(?:openstat|spylog)(\d+)"><\/span>/
-			$1
+			$1.to_i
 		when /<img src=["']?http:\/\/u([0-9.]+)\.spylog\.com\/cnt/
 			$1.gsub(/[.]/, '').to_i
 		else
