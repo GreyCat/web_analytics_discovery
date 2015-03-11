@@ -1,7 +1,7 @@
 require 'web_analytics_discovery/grabberutils'
 
 require 'json'
-require 'pp'
+require 'uri'
 
 module WebAnalyticsDiscovery
 class SimilarWeb
@@ -12,8 +12,17 @@ class SimilarWeb
 	end
 
 	def find_id(url)
-		url
+		extract_domain(url).gsub(/^www\./, '')
 	end
+
+        def extract_domain(url)
+		u = URI::parse(url)
+		if u.host
+			u.host
+		else
+			url
+		end
+        end
 
 	def run_id(id)
 		return nil unless id
