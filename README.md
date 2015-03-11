@@ -18,6 +18,7 @@ The supported web analytics systems are:
 * Openstat
 * Quantcast
 * Rambler Top100
+* SimilarWeb
 * Yandex Metrika
 
 ## The problem
@@ -95,6 +96,7 @@ service in `WebAnalyticsDiscovery` module:
 * `Openstat`
 * `Quantcast`
 * `Rambler`
+* `SimilarWeb`
 * `YandexMetrika`
 
 One can use it like that:
@@ -118,7 +120,7 @@ from a given service.
 
 ## Licensing and usage
 
-Copyright (C) 2013-2014  Mikhail Yakshin <greycat@altlinux.org>
+Copyright (C) 2013-2015  Mikhail Yakshin <greycat@altlinux.org>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as
