@@ -1,22 +1,5 @@
 require 'spec_helper'
 
-def check_mailru(res)
-  expect(res[:visitors_day]).not_to be_nil
-  expect(res[:visitors_day]).to be_an(Integer)
-  expect(res[:pv_day]).not_to be_nil
-  expect(res[:pv_day]).to be_an(Integer)
-
-  expect(res[:visitors_week]).not_to be_nil
-  expect(res[:visitors_week]).to be_an(Integer)
-  expect(res[:pv_week]).not_to be_nil
-  expect(res[:pv_week]).to be_an(Integer)
-
-  expect(res[:visitors_mon]).not_to be_nil
-  expect(res[:visitors_mon]).to be_an(Integer)
-  expect(res[:pv_mon]).not_to be_nil
-  expect(res[:pv_mon]).to be_an(Integer)
-end
-
 describe Quantcast do
   it 'should parse photobucket.com directly' do
     res = Quantcast.new.run('http://photobucket.com/')
@@ -28,14 +11,14 @@ describe Quantcast do
     expect(res[:visits_day]).to be_an(Integer)
     expect(res[:pv_day]).not_to be_nil
     expect(res[:pv_day]).to be_an(Integer)
-    
+
     expect(res[:visitors_week]).not_to be_nil
     expect(res[:visitors_week]).to be_an(Integer)
     expect(res[:visits_week]).not_to be_nil
     expect(res[:visits_week]).to be_an(Integer)
     expect(res[:pv_week]).not_to be_nil
     expect(res[:pv_week]).to be_an(Integer)
-    
+
     expect(res[:visitors_mon]).not_to be_nil
     expect(res[:visitors_mon]).to be_an(Integer)
     expect(res[:visits_mon]).not_to be_nil
